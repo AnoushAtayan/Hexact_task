@@ -12,7 +12,7 @@ class DatesSpider(scrapy.Spider):
 
     def start_requests(self):
         with open(self.csv_path, 'r') as csf_file:
-            for url in csf_file.readlines()[1:5000]:
+            for url in csf_file.readlines()[1:]:
                 url = url.strip()
                 yield scrapy.Request(url, callback=self.parse, meta={'url': url})
 
@@ -20,7 +20,7 @@ class DatesSpider(scrapy.Spider):
         footer_date = None
         footer = response.xpath('//footer//text()')
         if footer:
-            match = footer.re(r'©[ \t\n]*(\d{4})(?:[ \t\n-–]+(\d{4}))?')
+            match = footer.re(r'©[ \t\n]*(\d{4})(?:[ \t\n]*[-–][ \t\n]*(\d{4}))?')
             if match:
                 if not match[1]:
                     footer_date = int(match[0])
