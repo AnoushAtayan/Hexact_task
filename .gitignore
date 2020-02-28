@@ -1,0 +1,9 @@
+*.pyc
+*.sw[op]
+.cache/
+*.*.log*
+*.log*
+*logs.txt
+.idea/
+*venv/
+/.env
